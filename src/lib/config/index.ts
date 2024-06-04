@@ -1,11 +1,13 @@
 const bucketNames = ['wearings', 'regions', 'meshes'] as const;
 const storageBase = 'storage';
+const metadataFile = `${storageBase}/metadata.json`;
 
 type BucketName = (typeof bucketNames)[number];
 
 const config = {
 	bucketNames,
-	storageBase
+	storageBase,
+	metadataFile
 } as const;
 
 type WSMessage = {
