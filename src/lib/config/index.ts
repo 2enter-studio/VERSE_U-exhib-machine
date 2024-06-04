@@ -19,3 +19,4 @@ type WSMessage = {
 export type { BucketName, WSMessage };
 
 export default config;
+export type { Tables } from './supabase';
