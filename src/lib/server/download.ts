@@ -7,3 +7,5 @@ async function downloadFile(bucket: BucketName, name: string) {
 	const { data, error } = await db.storage.from(bucket).download(name);
 	if (error) return { error };
 }
+
+export { downloadFile };
