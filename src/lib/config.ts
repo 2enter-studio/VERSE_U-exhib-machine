@@ -1,10 +1,13 @@
-const bucketNames = ['wearings', 'regions', 'meshes', 'user_data'] as const;
-
-const config = {
-	bucketNames
-} as const;
+const bucketNames = ['wearings', 'regions', 'meshes'] as const;
+const storageBase = 'storage';
 
 type BucketName = (typeof bucketNames)[number];
+
+const config = {
+	bucketNames,
+	storageBase
+} as const;
+
 type WSMessage = {
 	avatars: {
 		id: string;
