@@ -1,21 +1,22 @@
 import fs from 'fs';
 import validator from 'validator';
 import { db } from './db';
-import CONFIG, { type BucketName, type MetaData } from '../config';
+import config, { type BucketName, type MetaData } from '../config';
 import { metadata } from './state';
+import { deepClone } from '@/utils';
 
-const { BUCKET_NAMES, METADATA_FILE } = CONFIG;
+const { BUCKET_NAMES, METADATA_FILE, EMPTY_METADATA } = config;
 
 function getMetaDataBackUp() {
 	const exist = fs.existsSync(METADATA_FILE);
 	if (!exist) {
-		return { wearings: [], meshes: [] };
+		return deepClone(EMPTY_METADATA);
 	}
 	const data = fs.readFileSync(METADATA_FILE).toString();
 	if (validator.isJSON(data)) {
 		return JSON.parse(data) as MetaData;
 	}
-	return { wearings: [], meshes: [] };
+	return deepClone(EMPTY_METADATA);
 }
 
 function setMetaDataBackUp(data: MetaData) {
