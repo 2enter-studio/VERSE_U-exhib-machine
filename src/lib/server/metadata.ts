@@ -1,20 +1,20 @@
 import { db } from './db';
-import config, { type BucketName, type Tables } from '../config';
+import { metadata } from '@/stores';
+import config, { type MetaData } from '../config';
+import fs from 'fs';
 
-const { bucketNames } = config;
+const { bucketNames, metadataFile } = config;
 
-type TableMap = {
-	[P in BucketName]: Tables<P>[];
-};
-
-async function fetchAllMetaData() {
+async function fetchMetaData() {
 	const result: any = {};
 	for (const table of bucketNames) {
 		const { data, error } = await db.from(table).select('*');
 		if (error) continue;
 		if (data) result[table] = data;
 	}
-	return result as TableMap;
+	fs.writeFileSync(metadataFile, JSON.stringify(result, null, 2));
+	metadata.set(result as MetaData);
+	return result as MetaData;
 }
 
-export { fetchAllMetaData };
+export { fetchMetaData };
