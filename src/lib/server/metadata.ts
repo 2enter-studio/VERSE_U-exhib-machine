@@ -5,7 +5,7 @@ import fs from 'fs';
 
 const { bucketNames, metadataFile } = config;
 
-async function fetchMetaData() {
+async function loadMetaData() {
 	const result: any = {};
 	for (const table of bucketNames) {
 		const { data, error } = await db.from(table).select('*');
@@ -17,4 +17,4 @@ async function fetchMetaData() {
 	return result as MetaData;
 }
 
-export { fetchMetaData };
+export { loadMetaData };
