@@ -1,13 +1,14 @@
 import fs from 'fs';
 import config, { type BucketName } from '@/config';
 import { db } from './db';
+import chalk from 'chalk';
 
 const { STORAGE_BASE, TEXTURE_TYPES } = config;
 
 async function downloadFile(bucket: BucketName, name: string, saveName = name) {
 	const { data: blob, error } = await db.storage.from(bucket).download(name);
 	if (error) {
-		console.error(`Can not download file: ${bucket}/${name}`);
+		console.log(chalk.red(`Can not download file: ${bucket}/${name}`));
 		// console.error(error);
 		return { error };
 	}
@@ -19,7 +20,7 @@ async function downloadFile(bucket: BucketName, name: string, saveName = name) {
 		fs.mkdirSync(path, { recursive: true });
 	}
 	fs.writeFileSync(`${STORAGE_BASE}/${bucket}/${saveName}`, buffer);
-	console.log(`file downloaded: ${bucket}/${name}`);
+	console.log(chalk.green(`file downloaded: ${bucket}/${name}`));
 }
 
 async function downloadUpdated(data: { table: BucketName; id: string }[]) {
