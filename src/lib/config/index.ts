@@ -1,16 +1,19 @@
 import type { Tables } from '@/config/supabase';
 
-const bucketNames = ['wearings', 'regions', 'meshes'] as const;
-const storageBase = 'storage';
-const metadataFile = `${storageBase}/metadata.json`;
+const BUCKET_NAMES = ['wearings', 'meshes'] as const;
+const STORAGE_BASE = 'storage';
+const METADATA_FILE = `${STORAGE_BASE}/metadata.json`;
+const TEXTURE_TYPES = ['baseColor', 'metallic', 'normal', 'roughness'];
 
-type BucketName = (typeof bucketNames)[number];
+type BucketName = (typeof BUCKET_NAMES)[number];
 type MetaData = { [P in BucketName]: Tables<P>[] };
 
-const config = {
-	bucketNames,
-	storageBase,
-	metadataFile
+const CONFIG = {
+	BUCKET_NAMES,
+	STORAGE_BASE,
+	METADATA_FILE,
+	TEXTURE_TYPES,
+	META_DATA_UPDATE_TIMEOUT: 3000
 } as const;
 
 type WSMessage = {
@@ -23,5 +26,5 @@ type WSMessage = {
 
 export type { BucketName, WSMessage };
 
-export default config;
+export default CONFIG;
 export type { Tables, MetaData };
