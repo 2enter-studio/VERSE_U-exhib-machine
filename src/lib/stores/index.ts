@@ -3,4 +3,4 @@ import { writable } from 'svelte/store';
 
 const metadata = writable<MetaData | null>();
 
-export { metadata };
+// export { metadata };
