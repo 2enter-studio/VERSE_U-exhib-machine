@@ -1,8 +1,11 @@
+import type { Tables } from '@/config/supabase';
+
 const bucketNames = ['wearings', 'regions', 'meshes'] as const;
 const storageBase = 'storage';
 const metadataFile = `${storageBase}/metadata.json`;
 
 type BucketName = (typeof bucketNames)[number];
+type MetaData = { [P in BucketName]: Tables<P>[] };
 
 const config = {
 	bucketNames,
@@ -21,4 +24,4 @@ type WSMessage = {
 export type { BucketName, WSMessage };
 
 export default config;
-export type { Tables } from './supabase';
+export type { Tables, MetaData };
