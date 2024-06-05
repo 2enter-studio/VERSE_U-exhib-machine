@@ -1,7 +1,8 @@
+import { STORAGE_BASEPATH } from '$env/static/private';
 import type { Tables } from '@/config/supabase';
 
 const BUCKET_NAMES = ['wearings', 'meshes'] as const;
-const STORAGE_BASE = 'storage';
+const STORAGE_BASE = STORAGE_BASEPATH ?? 'storage';
 const METADATA_FILE = `${STORAGE_BASE}/metadata.json`;
 const TEXTURE_TYPES = ['baseColor', 'metallic', 'normal', 'roughness'];
 const EMPTY_METADATA = { wearings: [], meshes: [] };
