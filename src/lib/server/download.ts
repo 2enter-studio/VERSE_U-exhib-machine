@@ -26,7 +26,7 @@ async function downloadFile(bucket: BucketName, name: string, saveName = name) {
 		fs.mkdirSync(path, { recursive: true });
 	}
 	fs.writeFileSync(`${STORAGE_BASE}/${bucket}/${saveName}`, buffer);
-	console.log(chalk.green(`file downloaded: ${bucket}/${name}`));
+	console.log(chalk.cyan(`file downloaded: ${bucket}/${name}`));
 }
 
 async function downloadUpdated(data: { table: BucketName; id: string }[]) {
@@ -47,6 +47,7 @@ async function downloadUpdated(data: { table: BucketName; id: string }[]) {
 				break;
 		}
 	}
+	console.log(chalk.green('download finished'));
 }
 
 export { downloadUpdated, initFileStorage };
