@@ -11,15 +11,17 @@ const EMPTY_METADATA = { wearings: [], meshes: [] };
 type BucketName = (typeof BUCKET_NAMES)[number];
 type MetaData = { [P in BucketName]: Tables<P>[] };
 
-type WSMessage = {
-	avatars: {
-		id: string;
-		wearings: { id: string; meshId: string }[];
-		skinCol: { X: number; Y: number; Z: number };
-	}[];
+type UEPlayer = {
+	id: string;
+	wearings: { id: string; mesh: string }[];
+	skinCol: { X: number; Y: number; Z: number };
 };
 
-export type { Tables, MetaData, BucketName, WSMessage };
+type UEPlayerBundle = {
+	avatars: UEPlayer[];
+};
+
+export type { Tables, MetaData, BucketName, UEPlayerBundle, UEPlayer };
 
 export default {
 	BUCKET_NAMES,
