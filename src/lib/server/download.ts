@@ -5,6 +5,12 @@ import chalk from 'chalk';
 
 const { STORAGE_BASE, TEXTURE_TYPES } = config;
 
+function initFileStorage() {
+	if (!fs.existsSync(STORAGE_BASE)) {
+		fs.mkdirSync(STORAGE_BASE, { recursive: true });
+	}
+}
+
 async function downloadFile(bucket: BucketName, name: string, saveName = name) {
 	const { data: blob, error } = await db.storage.from(bucket).download(name);
 	if (error) {
@@ -42,5 +48,7 @@ async function downloadUpdated(data: { table: BucketName; id: string }[]) {
 		}
 	}
 }
+
+initFileStorage();
 
 export { downloadUpdated };
