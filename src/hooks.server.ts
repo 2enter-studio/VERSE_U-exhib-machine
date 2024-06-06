@@ -9,14 +9,14 @@ import { serverState } from '@/server/state';
 async function serverInit() {
 	initFileStorage();
 	initMetaData();
-	console.log(chalk.green('Server initialized!'));
+	serverState.initialized = true;
 }
 
 const handle: Handle = async ({ event, resolve }) => {
 	if (!serverState.initialized) {
 		console.log(chalk.yellowBright('Initializing server...'));
 		await serverInit();
-		serverState.initialized = true;
+		console.table(serverState);
 	}
 
 	const res = await resolve(event);
