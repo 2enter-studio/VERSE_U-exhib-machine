@@ -8,8 +8,14 @@ const metadata: { old: MetaData; new: MetaData } = {
 	new: deepClone(EMPTY_METADATA)
 };
 
-let serverState = {
-	initialized: false
+type ServerState = {
+	initialized: boolean;
+	mode: 'development' | 'production';
+};
+
+let serverState: ServerState = {
+	initialized: false,
+	mode: 'development'
 };
 
 export { metadata, serverState };
