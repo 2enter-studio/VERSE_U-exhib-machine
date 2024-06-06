@@ -17,7 +17,7 @@ const handle: Handle = async ({ event, resolve }) => {
 	if (!serverInitialized) {
 		console.log(chalk.yellowBright('Initializing server...'));
 		await serverInit();
-		serverInitialized = false;
+		serverInitialized = true;
 	}
 
 	const res = await resolve(event);
