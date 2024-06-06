@@ -8,4 +8,8 @@ const metadata: { old: MetaData; new: MetaData } = {
 	new: deepClone(EMPTY_METADATA)
 };
 
-export { metadata };
+let serverState = {
+	initialized: false
+};
+
+export { metadata, serverState };
