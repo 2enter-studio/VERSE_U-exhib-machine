@@ -7,6 +7,10 @@ import { deepClone } from '@/utils';
 
 const { BUCKET_NAMES, METADATA_FILE, EMPTY_METADATA } = config;
 
+function initMetaData() {
+	metadata.old = getMetaDataBackUp();
+}
+
 function getMetaDataBackUp() {
 	const exist = fs.existsSync(METADATA_FILE);
 	if (!exist) {
@@ -58,6 +62,4 @@ async function loadMetaData() {
 	setMetaDataBackUp(metadata.new);
 }
 
-metadata.old = getMetaDataBackUp();
-
-export { loadMetaData, getUpdated };
+export { loadMetaData, getUpdated, initMetaData };

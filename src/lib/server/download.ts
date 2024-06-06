@@ -49,6 +49,4 @@ async function downloadUpdated(data: { table: BucketName; id: string }[]) {
 	}
 }
 
-initFileStorage();
-
-export { downloadUpdated };
+export { downloadUpdated, initFileStorage };
