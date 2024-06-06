@@ -29,7 +29,11 @@ async function downloadUpdated(data: { table: BucketName; id: string }[]) {
 		switch (table) {
 			case 'wearings':
 				for (const textureType of TEXTURE_TYPES) {
-					await downloadFile(table, `textures/${id}_${textureType}`);
+					await downloadFile(
+						table,
+						`textures/${id}_${textureType}`,
+						`textures/${id}_${textureType}.jpg`
+					);
 				}
 				break;
 			case 'meshes':
