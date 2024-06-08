@@ -180,6 +180,39 @@ export type Database = {
         }
         Relationships: []
       }
+      chat_messages_2024_06: {
+        Row: {
+          chat: string
+          content: string
+          created_at: string
+          id: string
+          readed: boolean
+          reply_to: string | null
+          reply_to_datetime: string | null
+          sender: string
+        }
+        Insert: {
+          chat: string
+          content: string
+          created_at?: string
+          id?: string
+          readed?: boolean
+          reply_to?: string | null
+          reply_to_datetime?: string | null
+          sender?: string
+        }
+        Update: {
+          chat?: string
+          content?: string
+          created_at?: string
+          id?: string
+          readed?: boolean
+          reply_to?: string | null
+          reply_to_datetime?: string | null
+          sender?: string
+        }
+        Relationships: []
+      }
       chats: {
         Row: {
           created_at: string
@@ -197,6 +230,32 @@ export type Database = {
           is_group_chat?: boolean
         }
         Relationships: []
+      }
+      hai_an_players: {
+        Row: {
+          created_at: string
+          id: string
+          player: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          player?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          player?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_hai_an_players_player_fkey"
+            columns: ["player"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["user"]
+          },
+        ]
       }
       "j-users-tags": {
         Row: {
