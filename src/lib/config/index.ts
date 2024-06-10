@@ -11,6 +11,7 @@ const EMPTY_METADATA = { wearings: [], meshes: [] };
 type BucketName = (typeof BUCKET_NAMES)[number];
 type MetaData = { [P in BucketName]: Tables<P>[] };
 
+type Player = Tables<'profiles'> & { wearings: { id: string; mesh: string }[] };
 type UEPlayer = {
 	id: string;
 	wearings: { id: string; mesh: string }[];
@@ -21,13 +22,14 @@ type UEPlayerBundle = {
 	avatars: UEPlayer[];
 };
 
-export type { Tables, MetaData, BucketName, UEPlayerBundle, UEPlayer };
+export type { Tables, MetaData, BucketName, UEPlayerBundle, UEPlayer, Player };
 
 export default {
 	BUCKET_NAMES,
 	STORAGE_BASE,
 	METADATA_FILE,
 	TEXTURE_TYPES,
-	EMPTY_METADATA
+	EMPTY_METADATA,
+	HAI_AN_CALL_TIMEOUT: 3000
 	// META_DATA_UPDATE_TIMEOUT: 3000
 } as const;

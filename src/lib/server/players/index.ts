@@ -1,7 +1,5 @@
 import { db } from '@/server/db';
-import type { Tables, UEPlayer } from '@/config';
-
-type Player = Tables<'profiles'> & { wearings: { id: string; mesh: string }[] };
+import type { Player, UEPlayer } from '@/config';
 
 async function getLeaderBoard() {
 	const { data, error } = await db
