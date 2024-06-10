@@ -21,7 +21,7 @@ async function getPlayerInfo(player_id: string) {
 		.returns<Player[]>();
 }
 
-function genUEPlayerData(player: Player): UEPlayer {
+function genUEPlayer(player: Player): UEPlayer {
 	return {
 		id: player.user,
 		wearings: player.wearings,
@@ -29,4 +29,4 @@ function genUEPlayerData(player: Player): UEPlayer {
 	};
 }
 
-export { getLeaderBoard };
+export { getLeaderBoard, genUEPlayer, getPlayerInfo };
