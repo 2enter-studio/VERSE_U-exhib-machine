@@ -1,8 +1,9 @@
 import fs from 'fs';
 import validator from 'validator';
-import { db } from './db';
-import config, { type BucketName, type MetaData } from '../config';
-import { metadata } from './state';
+import moment from 'moment';
+import { db } from '@/server/db';
+import config, { type BucketName, type MetaData } from '@/config';
+import { metadata, serverState } from '@/server/state';
 import { deepClone } from '@/utils';
 
 const { BUCKET_NAMES, METADATA_FILE, EMPTY_METADATA } = config;
@@ -43,6 +44,7 @@ function getUpdated() {
 				}
 			}
 		}
+		serverState.lastUpdated = moment();
 	}
 
 	return result;
