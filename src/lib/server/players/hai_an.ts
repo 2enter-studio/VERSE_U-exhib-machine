@@ -11,7 +11,7 @@ async function getHaiAnPlayers() {
 	return data ?? [];
 }
 
-function subscriptToHaiAnPlayers(players: Tables<'hai_an_players'>) {
+function subscriptToHaiAnPlayers(players?: Tables<'hai_an_players'>) {
 	db.channel('hai_an_players')
 		.on(
 			'postgres_changes',
