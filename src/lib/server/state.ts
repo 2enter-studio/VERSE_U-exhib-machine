@@ -21,6 +21,5 @@ const serverState: ServerState = {
 	lastUpdated: moment()
 };
 
-let haiAnPlayers: string[] = [];
 
 export { metadata, serverState };
