@@ -30,4 +30,6 @@ const handle: Handle = async ({ event, resolve }) => {
 	return res;
 };
 
-export { handle, wsHandler };
+export const handleWebsocket = wsHandler;
+
+export { handle };
