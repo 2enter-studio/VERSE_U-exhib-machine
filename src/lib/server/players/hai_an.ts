@@ -1,30 +1,33 @@
 import { db } from '@/server/db';
-import type { Tables } from '@/config';
+import type { Player, UEPlayerBundle } from '@/config';
+import { genUEPlayer } from '@/server/players';
+import { broadcastMessage } from '@/server/ws';
 
-async function getHaiAnPlayers() {
+async function callHaiAnPlayer() {
 	const { data, error } = await db
 		.from('hai_an_players')
-		.select('player(wearings(id,mesh))')
-		.returns<Tables<'hai_an_players'>[]>();
+		.select('id')
+		.order('created_at', { ascending: true })
+		.limit(1)
+		.single();
 
-	if (error) return { error };
-	return data ?? [];
+	if (error || !data) return;
+	const target_id = data.id;
+	{
+		const { data, error } = await db
+			.from('hai_an_players')
+			.delete()
+			.eq('id', target_id)
+			.select('player(user, wearings(id,mesh))')
+			.returns<{ player: Player }[]>()
+			.single();
+
+		if (error || !data) return;
+		const uePlayer = genUEPlayer(data.player);
+		const message: UEPlayerBundle = { avatars: [uePlayer] };
+
+		broadcastMessage(JSON.stringify(message));
+	}
 }
 
-function subscriptToHaiAnPlayers(players?: Tables<'hai_an_players'>) {
-	db.channel('hai_an_players')
-		.on(
-			'postgres_changes',
-			{
-				table: 'hai_an_players',
-				schema: 'public',
-				event: 'INSERT'
-			},
-			(payload) => {
-				console.log(payload);
-			}
-		)
-		.subscribe();
-}
-
-export { getHaiAnPlayers, subscriptToHaiAnPlayers };
+export { callHaiAnPlayer };
