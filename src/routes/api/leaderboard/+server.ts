@@ -8,7 +8,7 @@ export const GET = async () => {
 
 	const uePlayers: UEPlayer[] = players.map((player) => {
 		return {
-			id: player.id,
+			id: player.user,
 			wearings: player.wearings,
 			skinCol: { X: 0, Y: 0, Z: 0 }
 		};
