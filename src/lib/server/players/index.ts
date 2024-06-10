@@ -18,7 +18,10 @@ async function getPlayerInfo(player_id: string) {
 		.from('profiles')
 		.select('wearings(id, mesh)')
 		.eq('user', player_id)
-		.returns<Player[]>();
+		.returns<Player[]>()
+		.single();
+	if (error) return { error };
+	return data;
 }
 
 function genUEPlayer(player: Player): UEPlayer {
